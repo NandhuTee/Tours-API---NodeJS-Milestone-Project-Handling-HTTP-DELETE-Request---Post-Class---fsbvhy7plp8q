@@ -46,7 +46,7 @@ app.post('/tours', (req, res) => {
 app.put('/tours/:id', (req, res) => {
   const tourId = parseInt(req.params.id);
   const updatedTour = req.body;
-  
+
   const tours = readToursFromFile();
   const tourIndex = tours.findIndex(tour => tour.id === tourId);
 
@@ -75,6 +75,12 @@ app.delete('/tours/:id', (req, res) => {
   writeToursToFile(tours);
 
   res.status(200).json({ message: 'Tour deleted successfully' });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Internal Server Error' });
 });
 
 module.exports = app;
