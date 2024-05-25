@@ -51,7 +51,7 @@ app.put('/tours/:id', (req, res) => {
   const tourIndex = tours.findIndex(tour => tour.id === tourId);
 
   if (tourIndex === -1) {
-    return res.status(404).json({ error: 'Tour not found' });
+    return res.status(404).json({ message: 'Tour not found' });
   }
 
   tours[tourIndex] = { ...tours[tourIndex], ...updatedTour };
@@ -68,7 +68,7 @@ app.delete('/tours/:id', (req, res) => {
   const tourIndex = tours.findIndex(tour => tour.id === tourId);
 
   if (tourIndex === -1) {
-    return res.status(404).json({ error: 'Tour not found' });
+    return res.status(404).json({ message: 'Tour not found' });
   }
 
   tours.splice(tourIndex, 1);
